@@ -26,8 +26,8 @@ var movies = require('./movies.js')
 
 app.use('/movies',movies)
 app.use('/movie',movies)
-app.listen(8000, ()=>{
-    console.log('server listning port 8000');
+app.listen(5000, ()=>{
+    console.log('server listning port 5000');
 })
 
 

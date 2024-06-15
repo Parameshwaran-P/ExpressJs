@@ -52,7 +52,7 @@ router.post('/movie', (req, res) => {
 });
 
 router.delete('/:id',(req, res)=>{
- const removeId = movies.findIndex(movie=>movie.id === req.params.id)
+ const removeId = movies.findIndex(movie => movie.id === parseInt(req.params.id))
  if(removeId===-1){
    res.json({message:"movie not found"})
  }
@@ -60,5 +60,21 @@ router.delete('/:id',(req, res)=>{
     movies.splice(removeId, 1)
     res.json({message:"movie deleted"})
  }
+})
+
+router.put('/:id',(req, res)=>{
+    const movie = movies.find(mov=>mov.id === parseInt(req.params.id))
+
+    if (!movie) {
+        res.send("Movie not found")
+        
+    } else {
+        const{id, name, year, rating}=req.body
+        movie.id=id
+        movie.name=name
+        movie.year=year
+        movie.rating=rating
+        res.send("movie updated")
+    }
 })
 module.exports=router
