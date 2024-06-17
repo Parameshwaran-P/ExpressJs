@@ -78,4 +78,15 @@ router.put('/:id',(req, res)=>{
     }
 })
 
+router.delete('/:id',(req, res)=>{
+    const delemployee = employee.findIndex(emp => emp.eid === parseInt(req.params.id))
+
+    if (delemployee === -1) {
+        res.send("employee not found")
+    } else {
+        employee.splice(delemployee, 1)
+        res.send("employee detail deleted")
+    }
+})
+
 module.exports = router
