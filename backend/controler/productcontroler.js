@@ -1,7 +1,7 @@
 const productmodel = require('../models/productModel')
 
 
-getProducts =async (req, res, next) =>{
+const getProducts =async (req, res, next) =>{
     const product=await productmodel.find({})
     res.json({
         success: true,
@@ -9,3 +9,5 @@ getProducts =async (req, res, next) =>{
     })
 
 }
+
+module.exports = getProducts
