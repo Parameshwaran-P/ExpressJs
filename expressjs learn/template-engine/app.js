@@ -6,9 +6,9 @@ const { engine } = require('express-handlebars')
 
 app.use(express.static(path.join(__dirname,'public')))
 
-// app.engine('hbs',engine({ extname: '.hbs', defaultLayout: 'main' }))
+app.engine('hbs',engine({ extname: '.hbs', defaultLayout: 'main' }))
 
-app.set('view engine', 'ejs')
+app.set('view engine', 'hbs')
 
 router.get('/', (req, res) => {
     const courses = [
