@@ -49,6 +49,10 @@ app.get('/', (req, res)=>{
 app.post('/upload',(req, res, next)=>{
 upload(req, res, (err)=>{
     if(err){
+
+        if (err instanceof multer.MulterError && err.code=='LIMIT_FILE_SIZE') {
+           return res.send("file size maximum 2mb")
+        }
         res.send(err)
     }else{
         res.send("Succes Image uploaded")
