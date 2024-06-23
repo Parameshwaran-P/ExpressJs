@@ -10,15 +10,19 @@ app.engine('hbs', exhbs.engine({layoutsDir:'views/', defaultLayout:'main', extna
 app.set('view engine', 'hbs')
 app.set('views', 'views')
 app.use(bodyParser.urlencoded({extended:true}))
-
+app.use(bodyParser.json())
 
 app.get('/',async (req, res)=>{
+
+    let message = ''
+    let edit_id, edit_book;
+
+    
    let database = await dbo.getDatabase()
    const collection = database.collection('books');
    const curser=collection.find({})
    let book = await curser.toArray()
-   let message = ''
-   let edit_id, edit_book;
+  
 
    if (req.query.edit_id) {
     edit_id = req.query.edit_id;
@@ -41,7 +45,7 @@ app.post('/create_book',async (req, res)=>{
     await collection.insertOne(book)
     return res.redirect('/?status=1')
 })
-app.use(bodyParser.json())
+
 app.listen(5000,()=>{
     console.log("server listning port 5000");
 })
